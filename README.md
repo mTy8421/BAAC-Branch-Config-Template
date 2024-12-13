@@ -5,7 +5,7 @@ service timestamps debug datetime msec localtime show-timezone
 service timestamps log datetime msec localtime show-timezone
 !
 !
-hostname  SW_dep_ratchaburi_04
+hostname SW_dep_ratchaburi_04
 !
 vtp mode transparent
 !
@@ -208,7 +208,7 @@ interface range GigabitEthernet 1/0/3-41
 description ## Connected to Front&Back Client ##
 !
 Switchport mode access
-switchport access  vlan 200
+switchport access vlan 200
  no cdp enable
 authentication event fail action next-method
 authentication event server dead action authorize vlan 200
