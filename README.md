@@ -66,11 +66,11 @@ shutdown
 Config Archiving
 ```
 archive
-log config
-logging enable
-logging size 200
-hidekeys
-notify syslog
+ log config
+  logging enable
+  logging size 200
+  hidekeys
+  notify syslog
 !
 ip domain name it.baac.or.th
 !
@@ -175,11 +175,11 @@ ntp server 172.19.1.8
 Virtual Terminal Console
 ```
 line con 0
-exec-timeout 10
+ exec-timeout 10
 !
 line vty 0 15
-exec-timeout 10
-transport input ssh
+ exec-timeout 10
+ transport input ssh
 login local
 !
 ```
@@ -187,14 +187,14 @@ Access-list
 ```
 !
 ip access-list extended ISE-CWA-REDIRECT-BAAC
-deny udp any any eq domain
-deny ip any host 172.26.168.3
-deny ip any host 172.26.168.4
-deny ip any host 172.26.168.8
-deny ip any host 172.26.168.9
-permit tcp any any eq www
-permit tcp any any eq 443
-permit tcp any any eq 8443
+ deny udp any any eq domain
+ deny ip any host 172.26.168.3
+ deny ip any host 172.26.168.4
+ deny ip any host 172.26.168.8
+ deny ip any host 172.26.168.9
+ permit tcp any any eq www
+ permit tcp any any eq 443
+ permit tcp any any eq 8443
 !
 ```
 Interface Configuration Mode (Access Host)
@@ -209,22 +209,22 @@ description ## Connected to Front&Back Client ##
 !
 Switchport mode access
 switchport access  vlan 200
-no cdp enable
+ no cdp enable
 authentication event fail action next-method
 authentication event server dead action authorize vlan 200
 authentication host-mode multi-auth
-authentication order mab dot1x
-authentication priority dot1x mab
-authentication port-control auto
-authentication periodic
-authentication timer reauthenticate server
-authentication timer restart 21
-authentication timer inactivity server
-authentication violation restrict
-mab
-dot1x pae authenticator
-dot1x timeout tx-period 10
-dot1x max-req 1
+ authentication order mab dot1x
+ authentication priority dot1x mab
+ authentication port-control auto
+ authentication periodic
+ authentication timer reauthenticate server
+ authentication timer restart 21
+ authentication timer inactivity server
+ authentication violation restrict
+ mab
+ dot1x pae authenticator
+ dot1x timeout tx-period 10
+ dot1x max-req 1
 no shut
 !
 !
@@ -239,25 +239,25 @@ no shut
 interface range GigabitEthernet 1/0/47-48
 description ## Connected to PBX-VOICE ##
 switchport access vlan 400
-switchport mode access
-switchport voice vlan 400
-authentication event fail action next-method
+ switchport mode access
+ switchport voice vlan 400
+ authentication event fail action next-method
 authentication event server dead action authorize vlan 400
-authentication event server dead action authorize voice
-authentication event server alive action reinitialize
-authentication host-mode multi-auth
-authentication order mab
-authentication priority mab
-authentication port-control auto
-authentication periodic
-authentication timer reauthenticate 3600
-authentication timer restart 21
-authentication timer inactivity server
-authentication violation restrict
-mab
-dot1x pae authenticator
-dot1x timeout tx-period 10
-dot1x max-req 1
+ authentication event server dead action authorize voice
+ authentication event server alive action reinitialize
+ authentication host-mode multi-auth
+ authentication order mab
+ authentication priority mab
+ authentication port-control auto
+ authentication periodic
+ authentication timer reauthenticate 3600
+ authentication timer restart 21
+ authentication timer inactivity server
+ authentication violation restrict
+ mab
+ dot1x pae authenticator
+ dot1x timeout tx-period 10
+ dot1x max-req 1
 no shut
 !
 ip default-gateway 10.96.123.126
@@ -280,7 +280,7 @@ description ## Connected to Switch_1 ##
 Switchport mode trunk
 switchport trunk all vlan 200,300,400,401,600,700,998
 channel-group 10 mode active
-no cdp enable
+ no cdp enable
 no shut
 spanning-tree portfast trunk
 !
@@ -296,23 +296,23 @@ ISE&AAA
 aaa new-model
 !
 radius server bkn-baac-psn01
-address ipv4 172.26.168.3 auth-port 1812 acct-port 1813
-key BAAC&AIT
+ address ipv4 172.26.168.3 auth-port 1812 acct-port 1813
+ key BAAC&AIT
 radius server bkn-baac-psn02
-address ipv4 172.26.168.4 auth-port 1812 acct-port 1813
-key BAAC&AIT
+ address ipv4 172.26.168.4 auth-port 1812 acct-port 1813
+ key BAAC&AIT
 radius server sri-baac-psn03
-address ipv4 172.26.168.8 auth-port 1812 acct-port 1813
-key BAAC&AIT
+ address ipv4 172.26.168.8 auth-port 1812 acct-port 1813
+ key BAAC&AIT
 radius server sri-baac-psn04
-address ipv4 172.26.168.9 auth-port 1812 acct-port 1813
-key BAAC&AIT
+ address ipv4 172.26.168.9 auth-port 1812 acct-port 1813
+ key BAAC&AIT
 !
 aaa group server radius NAC
-server name bkn-baac-psn01
-server name bkn-baac-psn02
-server name sri-baac-psn03
-server name sri-baac-psn04
+ server name bkn-baac-psn01
+ server name bkn-baac-psn02
+ server name sri-baac-psn03
+ server name sri-baac-psn04
 !
 aaa authentication dot1x default group NAC
 aaa authorization network default group NAC
@@ -343,11 +343,11 @@ radius-server attribute 31 mac format ietf upper-case
 radius-server attribute 31 send nas-port-detail
 !
 aaa server radius dynamic-author
-client 172.26.168.3 server-key BAAC&AIT
-client 172.26.168.4 server-key BAAC&AIT
-client 172.26.168.8 server-key BAAC&AIT
-client 172.26.168.9 server-key BAAC&AIT
-auth-type any
+ client 172.26.168.3 server-key BAAC&AIT
+ client 172.26.168.4 server-key BAAC&AIT
+ client 172.26.168.8 server-key BAAC&AIT
+ client 172.26.168.9 server-key BAAC&AIT
+ auth-type any
 !
 snmp-server trap-source Vlan200
 !
@@ -366,49 +366,49 @@ aaa authorization exec tacvty group tacacs+ local
 aaa authorization commands 15 default group tacacs+ local
 aaa authorization commands 15 tacvty group tacacs+ local
 aaa accounting exec tacvty
-action-type start-stop
-group tacacs+
+ action-type start-stop
+ group tacacs+
 !
 aaa accounting commands 0 tacvty
-action-type start-stop
-group tacacs+
+ action-type start-stop
+ group tacacs+
 !
 aaa accounting commands 1 tacvty
-action-type start-stop
-group tacacs+
+ action-type start-stop
+ group tacacs+
 !
 aaa accounting commands 15 default
-action-type start-stop
-group tacacs+
+ action-type start-stop
+ group tacacs+
 !
 aaa accounting commands 15 tacvty
-action-type start-stop
-group tacacs+
+ action-type start-stop
+ group tacacs+
 !
 line con 0
-password inservice
+ password inservice
 line vty 0 4
-password cisco
-authorization commands 15 tacvty
-authorization exec tacvty
-accounting commands 0 tacvty
-accounting commands 1 tacvty
-accounting commands 15 tacvty
-accounting exec tacvty
-login authentication tacvty
-transport preferred ssh
-transport input ssh
+ password cisco
+ authorization commands 15 tacvty
+ authorization exec tacvty
+ accounting commands 0 tacvty
+ accounting commands 1 tacvty
+ accounting commands 15 tacvty
+ accounting exec tacvty
+ login authentication tacvty
+ transport preferred ssh
+ transport input ssh
 line vty 5 15
-password cisco
-authorization commands 15 tacvty
-authorization exec tacvty
-accounting commands 0 tacvty
-accounting commands 1 tacvty
-accounting commands 15 tacvty
-accounting exec tacvty
-login authentication tacvty
-transport preferred ssh
-transport input ssh
+ password cisco
+ authorization commands 15 tacvty
+ authorization exec tacvty
+ accounting commands 0 tacvty
+ accounting commands 1 tacvty
+ accounting commands 15 tacvty
+ accounting exec tacvty
+ login authentication tacvty
+ transport preferred ssh
+ transport input ssh
 !
 tacacs-server host 172.26.168.5 key ciscobaac
 tacacs-server host 172.26.168.10 key ciscobaac
@@ -419,8 +419,8 @@ service password-encryption
 Shut and no shut interface range
 ```
 interface range GigabitEthernet 1/0/1-48
-shut
-no shut
+ shut
+ no shut
 !
 exit
 exit
